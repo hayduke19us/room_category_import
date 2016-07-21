@@ -95,9 +95,9 @@ module Builder
 
     def property_code_formats
       [
-        [brand_id, property_id.to_s.rjust(5, '0')].join,
-        [brand_id, property_id.to_s.rjust(5, '0')].join('-'),
-        [brand_id, property_id.to_s].join('-'),
+        [brand_id, property_id].join,
+        [brand_id, property_id].join('-'),
+        property_id
       ]
     end
 
