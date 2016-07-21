@@ -89,6 +89,7 @@ module Builder
     def initialize(args)
       @brand_id         = args[:brand_id]
       @property_id      = args[:property_id]
+      @room_code        = args[:room_type_id]
       @supplier_code    = args[:supplier_code]
       @subsupplier_code = args[:subsupplier_code]
     end
