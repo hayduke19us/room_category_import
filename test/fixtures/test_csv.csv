@@ -1,2 +1,2 @@
-brand_id,property_id,supplier_code,subsupplier_code
-B1234,P1234,intuitive,miki
+brand_id,property_id,supplier_code,subsupplier_code,room_type_id
+B1234,P1234,intuitive,miki,R1234

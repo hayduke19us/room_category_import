@@ -26,7 +26,7 @@ module ErrorMessages
     )
   end
 
-  def not_equal(type, mapping_attribute, category_attribute)
+  def not_equal_msg(type, mapping_attribute, category_attribute)
     %(
       #{type.capitalize} conflict
         - room type mapping: #{mapping_attribute}

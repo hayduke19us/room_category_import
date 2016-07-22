@@ -17,10 +17,11 @@ class ParserTest < Tester
     ARGF.stub :read, @file.read do
       rows = [
         {
-          :brand_id=>"B1234",
-          :property_id=>"P1234",
-          :supplier_code=>"intuitive",
-          :subsupplier_code=>"miki"
+          :brand_id => "B1234",
+          :property_id => "P1234",
+          :supplier_code => "intuitive",
+          :subsupplier_code => "miki",
+          :room_type_id => "R1234"
         }
       ]
 

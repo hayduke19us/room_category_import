@@ -1,4 +1,5 @@
 require_relative 'messages'
+require 'byebug'
 
 module Builder
   class RoomCategories
@@ -49,26 +50,23 @@ module Builder
     end
 
     def build_room_category(template)
-      self.category = template.property.room_categories.find_or_initalize_by id: template.room_code
+      self.category = find_or_create_room_category template
 
       if category.en_name_text
-        say room_category_has_en_translation_msg
+        say room_category_has_en_name_translation_msg
       else
         category.name.build({ language: 'en', text: template.name }, UserTranslatedText)
       end
     end
 
     def build_room_type_mapping(template)
-      self.mapping = room_category.room_type_mappings.find_or_initialize_by(
-        room_type_id: room_category.room_type_uuid,
-        supplier_property_id: room_category.supplier_property.id
-      )
+      self.mapping = find_or_create_room_type_mapping
 
       if not_equal? mapping.room_type_id, template.room_type_uuid
-        handle not_equal_msg 'room_type_id', mapping.room_type_id, category_template.room_type_uuid
+        handle not_equal_msg 'room_type_id', mapping.room_type_id, template.room_type_uuid
       end
 
-      if not_equal? mapping_template.room_type_code, template.room_code
+      if not_equal? mapping.room_type_code, template.room_code
         handle not_equal_msg 'room_type_code', mapping.room_type_code, template.room_code
       end
 
@@ -77,8 +75,19 @@ module Builder
       mapping.room_type_id      = template.room_type_uuid
     end
 
+    def find_or_create_room_category(template)
+      template.property.room_categories.find_or_initialize_by id: template.room_code
+    end
+
+    def find_or_create_room_type_mapping(template)
+      room_category.room_type_mappings.find_or_initialize_by(
+        room_type_id: room_category.room_type_uuid,
+        supplier_property_id: room_category.supplier_property.id
+      )
+    end
+
     def not_equal?(c1, c2)
-      c1.presence && c1 != c2
+      c1 && c2 && c1 != c2
     end
   end
 
