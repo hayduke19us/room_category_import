@@ -1,7 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 
-ENV['test'] = 'true'
 Dir.glob(File.expand_path('lib/*')).each { |file| require file }
 
 class Tester < Minitest::Test

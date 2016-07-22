@@ -4,9 +4,6 @@ require_relative 'parser'
 
 module Import
   def self.now
-    unless ENV['test']
-      builder = Builder::RoomCategories.new rows: Parser::RoomCategoryImport.new(argv: ARGV).parse
-      builder.build
-    end
+    Builder::RoomCategories.new(rows: Parser::RoomCategoryImport.new(argv: ARGV).parse).build
   end
 end
